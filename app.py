@@ -1,10 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Fri Mar 26 12:38:32 2021
-
-@author: deepak
-"""
-
 import numpy as np
 from flask import Flask, request, jsonify, render_template
 
@@ -12,7 +6,7 @@ import pickle
 
 
 app = Flask(__name__)
-model = pickle.load(open('linearregression.pkl','rb')) 
+model = pickle.load(open('heartass.pkl','rb')) 
 
 
 @app.route('/')
@@ -27,12 +21,12 @@ def predict():
     '''
     For rendering results on HTML GUI
     '''
-    exp = float(request.args.get('exp'))
+    Age = int(request.args.get('age'))
     
     prediction =int(model.predict([[exp]]))
     
         
-    return render_template('index.html', prediction_text='Regression Model  has predicted salary for given experinace is Rs.  : {}'.format(prediction))
+    return render_template('index.html', prediction_text='Regression Model  has predicted heart attack possibility for given age and gender: {}'.format(prediction))
 
 
 
